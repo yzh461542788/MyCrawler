@@ -2,18 +2,20 @@ package crawler;
 
 import consts.Consts;
 import eleme.model.menu.ElemeMenu;
+import eleme.model.menu.Foods;
 import eleme.model.restaurant.ElemeRestaurant;
 import org.junit.Test;
 import org.junit.Before; 
 import org.junit.After;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /** 
 * ElemeCrawler Tester. 
 * 
 * @author <Authors name> 
-* @since <pre>十一月 28, 2017</pre> 
+* @since <pre>十一锟斤拷 28, 2017</pre> 
 * @version 1.0 
 */ 
 public class ElemeCrawlerTest { 
@@ -33,9 +35,19 @@ public void after() throws Exception {
 */ 
 @Test
 public void testGet30RestaurantsModel() throws Exception {
-    List<ElemeRestaurant> rests = ElemeCrawler.get30Restaurants(Consts.DEFAULT_LATITUDE, Consts.DEFAULT_LONGITUDE, 0);
+    List<ElemeRestaurant> rests = ElemeCrawler.get30Restaurants(Consts.DEFAULT_LATITUDE, Consts.DEFAULT_LONGITUDE, 0);  //  get first 30 restaurants
     System.out.println(rests.get(0).getName() );
-} 
+    List<ElemeRestaurant> rests2 = ElemeCrawler.get30Restaurants(Consts.DEFAULT_LATITUDE, Consts.DEFAULT_LONGITUDE, 1);  //  get 31-60
+    List<ElemeMenu> menus = ElemeCrawler.getMenu(rests.get(0).getId() );
+    menus.stream().forEach(
+            m -> System.out.println(m.getDescription() + "\n"
+                        + String.join("\n",  m.getFoods().stream()
+                                .map(food ->
+                                        food.getName() + " " + food.getSpecfoods().get(0).getPrice() + " " + food.getDescription() )
+                                .collect(Collectors.toList() ) )
+                )
+    );
+}
 
 /** 
 * 
@@ -54,8 +66,6 @@ public void testGet30Restaurants() throws Exception {
 */ 
 @Test
 public void testGetMenu() throws Exception {
-    List<ElemeMenu> menus = ElemeCrawler.getMenu(767630);
-    System.out.println(menus.get(0).getName() );
 } 
 
 
