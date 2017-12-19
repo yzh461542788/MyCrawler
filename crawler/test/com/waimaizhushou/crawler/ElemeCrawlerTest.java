@@ -1,9 +1,9 @@
-package crawler;
+package com.waimaizhushou.crawler;
 
-import consts.Consts;
-import eleme.model.menu.ElemeMenu;
-import eleme.model.menu.Foods;
-import eleme.model.restaurant.ElemeRestaurant;
+import com.waimaizhushou.consts.Consts;
+import com.waimaizhushou.eleme.model.menu.ElemeMenu;
+import com.waimaizhushou.eleme.model.menu.Foods;
+import com.waimaizhushou.eleme.model.restaurant.ElemeRestaurant;
 import org.junit.Test;
 import org.junit.Before; 
 import org.junit.After;
