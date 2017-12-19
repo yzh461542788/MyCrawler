@@ -6,10 +6,11 @@ import com.waimaizhushou.meituan.model.menu.MeituanFoodByHtml;
 import com.waimaizhushou.meituan.model.menu.MeituanMenuByHtml;
 import com.waimaizhushou.meituan.model.restaurant.MeituanRestaurant;
 import com.waimaizhushou.meituan.model.restaurant.MeituanRestaurantByHtml;
+import com.waimaizhushou.util.GsonUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import com.waimaizhushou.util.GsonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class MeituanCrawler extends HttpGetBasic
 {
     public static List<MeituanMenuByHtml> getMenu(int restaurantId)
     {
-        return getMenu("com.waimaizhushou.http://waimai.com.waimaizhushou.meituan.com/restaurant/" + restaurantId);
+        return getMenu("http://waimai.meituan.com/restaurant/" + restaurantId);
     }
 
     public static List<MeituanMenuByHtml> getMenu(MeituanRestaurantByHtml restaurant)
@@ -66,7 +67,7 @@ public class MeituanCrawler extends HttpGetBasic
 
     public static List<MeituanRestaurantByHtml> getRestaurantsByHtml()
     {
-        String requestUrl = "com.waimaizhushou.http://waimai.com.waimaizhushou.meituan.com/home/wtw3rnfw1djv";
+        String requestUrl = "http://waimai.meituan.com/home/wtw3rnfw1djv";
         String content = httpGet(requestUrl);
         List<MeituanRestaurantByHtml> ret = new ArrayList<>();
         Document searchDoc = Jsoup.parse(content, requestUrl);
@@ -75,7 +76,7 @@ public class MeituanCrawler extends HttpGetBasic
             try{
                 String name = c.attr("data-title");
                 String desc = c.attr("data-bulletin");
-                String url = "com.waimaizhushou.http://waimai.com.waimaizhushou.meituan.com" + c.select("a.rest-atag").get(0).attr("href");
+                String url = "http://waimai.meituan.com" + c.select("a.rest-atag").get(0).attr("href");
                 String img = c.select("img.scroll-loading").get(0).attr("src");
                 String score = c.select("span.score-num").get(0).text();
                 int startPrice = Integer.parseInt(c.select("span.start-price").get(0).text().replace("起送:￥", ""));
@@ -108,14 +109,14 @@ public class MeituanCrawler extends HttpGetBasic
 
     public static String get15RestaurantsJson(String latitude, String longitude, int start)
     {
-        String requestUrl = "https://i.com.waimaizhushou.meituan.com/brunch/applet/index?&tag=food&page=0&firstTime=0";
+        String requestUrl = "https://i.meituan.com/brunch/applet/index?&tag=food&page=0&firstTime=0";
         requestUrl = requestUrl + "&lat=" +latitude + "&lng=" + longitude + "&page=" + (start / 15);
         return httpGet(requestUrl);
     }
 
     public static String getMenuJson(int restaurantId)
     {
-        String requestUrl = "https://i.com.waimaizhushou.meituan.com/brunch/applet/poi?id=";
+        String requestUrl = "https://i.meituan.com/brunch/applet/poi?id=";
         requestUrl = requestUrl + restaurantId;
         return httpGet(requestUrl);
     }

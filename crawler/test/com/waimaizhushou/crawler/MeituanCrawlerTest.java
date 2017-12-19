@@ -1,7 +1,7 @@
-package crawler;
+package com.waimaizhushou.crawler;
 
-import meituan.model.menu.MeituanMenuByHtml;
-import meituan.model.restaurant.MeituanRestaurantByHtml;
+import com.waimaizhushou.meituan.model.menu.MeituanMenuByHtml;
+import com.waimaizhushou.meituan.model.restaurant.MeituanRestaurantByHtml;
 import org.junit.Test;
 import org.junit.Before; 
 import org.junit.After;
