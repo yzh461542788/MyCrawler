@@ -13,10 +13,10 @@ import java.util.List;
  */
 public class ElemeCrawler extends HttpGetBasic
 {
-    public static List<ElemeMenu> getMenu(int restaurantId)
+    public static List<ElemeMenu> getMenu(int restaurantId, String latitude, String longitude)
     {
         try {
-            String menuJson = getMenuJson(restaurantId);
+            String menuJson = getMenuJson(restaurantId, latitude, longitude);
             List<ElemeMenu> menus = GsonUtil.parseJsonArrayWithGson(menuJson,
                     ElemeMenu.class);
             return menus;
@@ -44,10 +44,10 @@ public class ElemeCrawler extends HttpGetBasic
         return httpGet(requestUrl);
     }
 
-    public static String getMenuJson(int restaurantId)
+    public static String getMenuJson(int restaurantId, String latitude, String longitude)
     {
         String requestUrl = "https://www.ele.me/restapi/shopping/v2/menu?restaurant_id=";
         requestUrl = requestUrl + restaurantId;
-        return httpGet(requestUrl);
+        return httpGet(requestUrl, "https://www.ele.me/shop/" + restaurantId, "shopid=" + restaurantId + ";loc="+latitude+"," + longitude);
     }
 }

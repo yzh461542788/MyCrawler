@@ -21,16 +21,24 @@ public class HttpGetBasic
 
     protected static String httpGet(String url)
     {
-        return httpGet(url, DEFAULT_ENCODING);
+        return httpGet(url, DEFAULT_ENCODING, null, null);
     }
 
 
-    protected static String httpGet(String url, String encoding)
+    protected static String httpGet(String url, String referer, String xShard)
+    {
+        return httpGet(url, DEFAULT_ENCODING, referer, xShard);
+    }
+    protected static String httpGet(String url, String encoding, String referer, String xShard)
     {
         try {
             HttpGet httpGet = new HttpGet(url);
             HttpClientContext httpClientContext = HttpClientUtil.getHttpClientContext();
             httpGet.setHeader("User-Agent", HttpClientUtil.getDefaultUserAgent() );
+            if(referer != null)
+                httpGet.setHeader("referer", referer);
+            if(xShard != null)
+                httpGet.setHeader("x-shard", xShard);
             HttpResponse response = client.execute(httpGet, httpClientContext);
             //  save cookie
             CookieStore cookieStore = httpClientContext.getCookieStore();

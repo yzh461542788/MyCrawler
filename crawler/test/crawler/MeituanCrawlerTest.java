@@ -12,7 +12,7 @@ import java.util.List;
 * MeituanCrawler Tester. 
 * 
 * @author <Authors name> 
-* @since <pre>十一月 30, 2017</pre> 
+* @since <pre>十一锟斤拷 30, 2017</pre> 
 * @version 1.0 
 */ 
 public class MeituanCrawlerTest { 
@@ -40,7 +40,8 @@ public void testGet15Restaurants() throws Exception {
     System.out.println(meituanRestaurants.get(0).getName());
     Thread.sleep(5000); //  IMPORTANT: should wait for some time before crawlering menu
     List<MeituanMenuByHtml> menusOfFirstRestaurant = MeituanCrawler.getMenu(meituanRestaurants.get(0));
-    menusOfFirstRestaurant.stream().forEach(m -> System.out.println(m.toString()));
+    for(MeituanMenuByHtml m : menusOfFirstRestaurant)
+        System.out.println(m.toString() );
 } 
 
 /** 
