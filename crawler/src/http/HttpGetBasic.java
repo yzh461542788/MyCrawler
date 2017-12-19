@@ -1,12 +1,14 @@
 package http;
 
-import http.HttpClientUtil;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 
 /**
  * Created by azure on 2017/10/1.
@@ -27,8 +29,13 @@ public class HttpGetBasic
     {
         try {
             HttpGet httpGet = new HttpGet(url);
-            httpGet.setHeader("User-Agent", HttpClientUtil.getRandomUserAgent() );
-            HttpResponse response = client.execute(httpGet);
+            HttpClientContext httpClientContext = HttpClientUtil.getHttpClientContext();
+            httpGet.setHeader("User-Agent", HttpClientUtil.getDefaultUserAgent() );
+            HttpResponse response = client.execute(httpGet, httpClientContext);
+            //  save cookie
+            CookieStore cookieStore = httpClientContext.getCookieStore();
+            HttpClientUtil.saveCookieStore(cookieStore, "cookie");
+            //  get result html
             String result = EntityUtils.toString(response.getEntity(), encoding);
             logger.debug(result);
             return result;

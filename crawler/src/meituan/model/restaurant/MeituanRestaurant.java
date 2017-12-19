@@ -1,4 +1,4 @@
-package meituan.model;
+package meituan.model.restaurant;
 
 import java.util.List;
 
