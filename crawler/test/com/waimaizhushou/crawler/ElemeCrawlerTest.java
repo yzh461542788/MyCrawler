@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.After;
 
 import java.util.List;
-import java.util.stream.Collectors;
+//import java.util.stream.Collectors;
 
 /** 
 * ElemeCrawler Tester. 
@@ -38,14 +38,14 @@ public void testGet30RestaurantsModel() throws Exception {
     System.out.println(rests.get(0).getName() );
     List<ElemeRestaurant> rests2 = ElemeCrawler.get30Restaurants(Consts.DEFAULT_LATITUDE, Consts.DEFAULT_LONGITUDE, 1);  //  get 31-60
     List<ElemeMenu> menus = ElemeCrawler.getMenu(rests.get(0).getId() );
-    menus.stream().forEach(
-            m -> System.out.println(m.getDescription() + "\n"
-                        + String.join("\n",  m.getFoods().stream()
-                                .map(food ->
-                                        food.getName() + " " + food.getSpecfoods().get(0).getPrice() + " " + food.getDescription() )
-                                .collect(Collectors.toList() ) )
-                )
-    );
+//    menus.stream().forEach(
+//            m -> System.out.println(m.getDescription() + "\n"
+//                        + String.join("\n",  m.getFoods().stream()
+//                                .map(food ->
+//                                        food.getName() + " " + food.getSpecfoods().get(0).getPrice() + " " + food.getDescription() )
+//                                .collect(Collectors.toList() ) )
+//                )
+//    );
 }
 
 /** 

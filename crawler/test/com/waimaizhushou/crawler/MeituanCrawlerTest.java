@@ -40,7 +40,7 @@ public void testGet15Restaurants() throws Exception {
     System.out.println(meituanRestaurants.get(0).getName());
     Thread.sleep(5000); //  IMPORTANT: should wait for some time before crawlering menu
     List<MeituanMenuByHtml> menusOfFirstRestaurant = MeituanCrawler.getMenu(meituanRestaurants.get(0));
-    menusOfFirstRestaurant.stream().forEach(m -> System.out.println(m.toString()));
+//    menusOfFirstRestaurant.stream().forEach(m -> System.out.println(m.toString()));
 } 
 
 /** 
