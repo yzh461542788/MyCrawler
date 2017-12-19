@@ -36,7 +36,8 @@ public class MeituanCrawler extends HttpGetBasic
         String content = httpGet(url);
         Document searchDoc = Jsoup.parse(content, url);
         Elements menuElements = searchDoc.select("div.category");
-        menuElements.stream().forEach(menuElement -> {
+        for(Element menuElement : menuElements)
+        {
             String name = "";
             try {
                 name = menuElement.select("span.tag-na").text();
@@ -46,7 +47,8 @@ public class MeituanCrawler extends HttpGetBasic
             Elements contents = menuElement.select(".j-pic-food");
             MeituanMenuByHtml menu = new MeituanMenuByHtml(name);
             ret.add(menu);
-            contents.stream().forEach(c -> {
+            for(Element c: contents)
+            {
                 try{
                     String img = c.select("div.avatar > img").get(0).attr("data-src");
                     String desc = c.select(".description").size() > 0 ? c.select(".description").get(0).text() : "";
@@ -56,8 +58,8 @@ public class MeituanCrawler extends HttpGetBasic
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            });
-        });
+            }
+        }
 
         return ret;
     }
@@ -69,7 +71,7 @@ public class MeituanCrawler extends HttpGetBasic
         List<MeituanRestaurantByHtml> ret = new ArrayList<>();
         Document searchDoc = Jsoup.parse(content, requestUrl);
         Elements contents = searchDoc.select("div.restaurant");
-        contents.stream().forEach(c -> {
+        for(Element c: contents) {
             try{
                 String name = c.attr("data-title");
                 String desc = c.attr("data-bulletin");
@@ -86,7 +88,7 @@ public class MeituanCrawler extends HttpGetBasic
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        });
+        }
         return ret;
     }
 

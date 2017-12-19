@@ -13,7 +13,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by azure on 2017/9/30.
@@ -52,7 +51,7 @@ public class HttpClientUtil
 
     static {
         CookieStore cookieStore = readCookieStore("cookie");
-        httpClientList.addAll(proxyList
+        /*httpClientList.addAll(proxyList
                 .stream()
                 .map(s -> {
                     HttpClientBuilder build = org.apache.http.impl.client.HttpClients.custom();
@@ -74,7 +73,7 @@ public class HttpClientUtil
                                 .setDefaultRequestConfig(requestConfig)
                                 .build();
                 })
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()));*/
         //HttpHost proxy = new HttpHost("127.0.0.1", 8080);
         HttpClientBuilder build = org.apache.http.impl.client.HttpClients.custom();
         RequestConfig requestConfig = RequestConfig.custom()

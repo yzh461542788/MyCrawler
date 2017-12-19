@@ -2,7 +2,6 @@ package com.waimaizhushou.meituan.model.menu;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by azure on 2017/12/16.
@@ -39,6 +38,11 @@ public class MeituanMenuByHtml
 
     @Override public String toString()
     {
-        return name + "\n" + String.join("\n", foods.stream().map(MeituanFoodByHtml::toString).collect(Collectors.toList() ) );
+        String ret = name + "\n";
+        for(MeituanFoodByHtml m : foods)
+            ret += m.toString();
+        return ret;
+        //return name + "\n" + String.join("\n", foods.stream().map(MeituanFoodByHtml::toString).collect(Collectors.toList() ) );
     }
+
 }
